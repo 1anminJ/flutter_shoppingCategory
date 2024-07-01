@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'component/shoppingPages/EcoFriendly.dart';
 import 'component/shoppingPages/RankPage.dart';
 import 'component/shoppingPages/NewProducts.dart';
+import 'component/shoppingPages/shoppingCategory.dart';
 
 void main() {
   runApp(MyApp());
@@ -56,29 +57,9 @@ class _HomeScreenState extends State<HomeScreen> {
       Center(child: Text('피드')),
       Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              TextButton(onPressed: () => _onCategoryTapped(0), child: Text('친환경')),
-              TextButton(onPressed: () => _onCategoryTapped(1), child: Text('랭킹')),
-              TextButton(onPressed: () => _onCategoryTapped(2), child: Text('신상품')),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Wrap(
-              spacing: 8.0, // Chip 간의 수평 간격
-              runSpacing: 4.0, // Chip 간의 수직 간격
-              children: [
-                ChoiceChip(label: Text('비누'), selected: false),
-                ChoiceChip(label: Text('텀블러'), selected: false),
-                ChoiceChip(label: Text('수세미'), selected: false),
-                ChoiceChip(label: Text('바구니'), selected: false),
-                ChoiceChip(label: Text('치약'), selected: false),
-                ChoiceChip(label: Text('팩'), selected: false),
-                ChoiceChip(label: Text('에코백'), selected: false),
-              ],
-            ),
+          ShoppingCategory(
+            onCategoryTapped: _onCategoryTapped,
+            selectedCategoryIndex: _selectedCategoryIndex,
           ),
           Expanded(
             child: _categoryOptions(),
