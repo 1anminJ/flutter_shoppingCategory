@@ -1,10 +1,33 @@
 import 'package:flutter/material.dart';
 
-class RankingPage extends StatelessWidget {
+class RankingPage extends StatefulWidget {
+  @override
+  _RankingPageState createState() => _RankingPageState();
+}
+
+class _RankingPageState extends State<RankingPage> {
+  int _selectedChipIndex = -1; // 선택된 Chip의 인덱스 (-1은 선택되지 않음을 의미)
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Wrap(
+          spacing: 8.0, // Chip 간의 수평 간격
+          runSpacing: 4.0, // Chip 간의 수직 간격
+          children: List<Widget>.generate(choices.length, (int index) {
+            return ChoiceChip(
+              label: Text(choices[index]),
+              selected: _selectedChipIndex == index,
+              selectedColor: Colors.green[100],
+              onSelected: (bool selected) {
+                setState(() {
+                  _selectedChipIndex = selected ? index : -1;
+                });
+              },
+            );
+          }).toList(),
+        ),
         Expanded(
           child: GridView.count(
             crossAxisCount: 2,
@@ -39,4 +62,13 @@ class RankingPage extends StatelessWidget {
       ],
     );
   }
+  final List<String> choices = <String>[
+    '비누',
+    '텀블러',
+    '수세미',
+    '바구니',
+    '치약',
+    '팩',
+    '에코백',
+  ];
 }

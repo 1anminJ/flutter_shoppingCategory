@@ -40,6 +40,12 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  TextStyle _getCategoryTextStyle(int index) {
+    return TextStyle(
+      decoration: _selectedCategoryIndex == index ? TextDecoration.underline : TextDecoration.none,
+    );
+  }
+
   List<Widget> _widgetOptions() {
     return <Widget>[
       Center(child: Text('홈')),
