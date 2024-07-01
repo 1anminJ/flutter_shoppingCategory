@@ -37,19 +37,8 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  List<Widget> _widgetOptions() {
-    return <Widget>[
-      Center(child: Text('홈')),
-      Center(child: Text('피드')),
-      _categoryOptions(), // 장바구니 페이지
-      Center(child: Text('유저 정보')),
-      Center(child: Text('메뉴 페이지')),
-    ];
-  }
-
-
-  Widget _categoryOptions(int selectedCategoryIndex) {
-    switch (selectedCategoryIndex) {
+  Widget _categoryOptions() {
+    switch (_selectedCategoryIndex) {
       case 0:
         return EcoFriendlyPage();
       case 1:
@@ -61,33 +50,11 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Image.asset(
-            'assets/bell.png',
-            width: 24.0,
-            height: 24.0,
-            errorBuilder: (context, error, stackTrace) {
-              return Icon(Icons.error); // 에러 발생 시 표시할 아이콘
-            },
-          ),
-        ),
-        title: Text('풀떼기'),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16.0),
-            child: Icon(
-              Icons.search,
-              size: 30.0,
-            ),
-          )
-        ],
-      ),
-      body: Column(
+  List<Widget> _widgetOptions() {
+    return <Widget>[
+      Center(child: Text('홈')),
+      Center(child: Text('피드')),
+      Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -114,10 +81,42 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           Expanded(
-            child: _categoryOptions(_selectedCategoryIndex),
+            child: _categoryOptions(),
           ),
         ],
       ),
+      Center(child: Text('유저 정보')),
+      Center(child: Text('메뉴 페이지')),
+    ];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Image.asset(
+            'assets/bell.png',
+            width: 24.0,
+            height: 24.0,
+            errorBuilder: (context, error, stackTrace) {
+              return Icon(Icons.error); // 에러 발생 시 표시할 아이콘
+            },
+          ),
+        ),
+        title: Text('풀떼기'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0), // 아이콘의 오른쪽 여백을 조정
+            child: Icon(
+              Icons.search,
+              size: 30.0, // 아이콘 크기를 조정
+            ),
+          ),
+        ],
+      ),
+      body: _widgetOptions().elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
