@@ -157,23 +157,23 @@ class _HomeScreenState extends State<HomeScreen> {
         items: [
           BottomNavigationBarItem(
             icon: ImageIcon(AssetImage('assets/home.png')),
-            label: '홈',
+            label: '',
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(AssetImage('assets/feed.png')),
-            label: '피드',
+            label: '',
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(AssetImage('assets/shopping.png')),
-            label: '장바구니',
+            label: '',
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(AssetImage('assets/user.png')),
-            label: '유저 정보',
+            label: '',
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(AssetImage('assets/menu.png')),
-            label: '메뉴',
+            label: '',
           ),
         ],
         currentIndex: _selectedIndex,
