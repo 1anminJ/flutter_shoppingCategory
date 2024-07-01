@@ -38,6 +38,44 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void _showSearchDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          backgroundColor: Colors.black.withOpacity(0.5),
+          insetPadding: EdgeInsets.all(10.0),
+          child: Container(
+            padding: EdgeInsets.all(20.0),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: '검색어를 입력하세요',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    suffixIcon: IconButton(
+                      icon: Icon(Icons.search),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   Widget _categoryOptions() {
     switch (_selectedCategoryIndex) {
       case 0:
@@ -86,13 +124,30 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
         ),
-        title: Text('풀떼기'),
+        title: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text('풀떼기'),
+            SizedBox(width: 8), // 텍스트와 로고 사이의 간격
+            Image.asset(
+              'assets/logo.png',
+              width: 24.0,
+              height: 24.0,
+              errorBuilder: (context, error, stackTrace) {
+                return Icon(Icons.error); // 에러 발생 시 표시할 아이콘
+              },
+            ),
+          ],
+        ),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16.0), // 아이콘의 오른쪽 여백을 조정
-            child: Icon(
-              Icons.search,
-              size: 30.0, // 아이콘 크기를 조정
+            child: GestureDetector(
+              onTap: _showSearchDialog,
+              child: Icon(
+                Icons.search,
+                size: 30.0, // 아이콘 크기를 조정
+              ),
             ),
           ),
         ],
@@ -102,23 +157,23 @@ class _HomeScreenState extends State<HomeScreen> {
         items: [
           BottomNavigationBarItem(
             icon: ImageIcon(AssetImage('assets/home.png')),
-            label: '',
+            label: '홈',
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(AssetImage('assets/feed.png')),
-            label: '',
+            label: '피드',
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(AssetImage('assets/shopping.png')),
-            label: '',
+            label: '장바구니',
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(AssetImage('assets/user.png')),
-            label: '',
+            label: '유저 정보',
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(AssetImage('assets/menu.png')),
-            label: '',
+            label: '메뉴',
           ),
         ],
         currentIndex: _selectedIndex,
